@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carte</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+</head>
+<body>
+    <div id="card">
+        <div id="card-title">
+          <h1><img id="imageToConvert" src="./../assets/img/dyscom.png" alt="" style="width: 5vh; height: 5vh;"> République du Bénin <img src="./../assets/img/dyscom.png" alt="" style="width: 5vh; height: 5vh;"></h1>
+        </div>
+        <div id="card-id">
+          <div id="card-number">
+            <p class="cardtitle">ID de la Carte :</p>
+            <p>135622178070</p>
+          </div>
+            <p class="cardtitle">Nationalité béninoise</p>
+        </div>
+        <div id="card-information" style="margin-top: 2vh !important;">
+          <div id="card-photo" ></div>
+          <div id="card-text">
+          <div id="card-name">
+            <div class="card-box"></div>
+            <p class="cardtitle">Nom :</p>
+            <p id="nomx"></p>
+            <div class="card-box"></div>
+            <p class="cardtitle">Prénom :</p>
+            <p id="prenomx"></p>
+            <p class="cardtitle">Téléphone :</p>
+            <p id="phonex"></p>
+          </div>
+          <div id="card-detail">
+            <div class="card-box">
+              <p class="cardtitle">Sexe :</p>
+              <p id="sexex"></p>
+            </div>
+            <div class="card-box">
+              <p class="cardtitle">Né(e) le :</p>
+              <p id="datex"></p>
+            </div>
+            <div class="card-box">
+              <p class="cardtitle">Ville :</p>
+              <p id="villex"></p>
+            </div>
+          </div>
+          <div id="card-sign" >
+            <p class="cardtitle" >Email : <p id="emailx"></p></p><br>
+            <p class="cardtitle" id="cardsignp">Code ID :</p> ssk5683etBFJ987
+          <div id="cardsign" ><img src="https://cdn.pixabay.com/photo/2013/07/12/14/42/qr-code-148603_640.png" alt="" 
+            style="width: 6vh; height: 6vh;"></div>
+          </div> 
+          </div>
+        </div>
+        <div id="card-code">
+            <p>
+              <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   <<<<<<<<<<<<<<<<<<<<<<<<
+            </p>
+          </div>
+    </div>
+    <button id="senderPdf">Envoyer</button>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Bitter|Arvo|ato&display=swap');
+
+        body {
+        background-image: url(https://mangetoica.com/gallery_images/homepage/background-mosaiques//bg.png);
+        display: flex;
+        }
+
+        h1,h2,p{
+        margin: 0;
+        }
+
+        h1{
+        font-family: 'Arvo', serif;
+        font-weight: lighter;
+        font-size: 25px;
+        }
+
+        .cardtitle {
+        font-family: 'Bitter', serif;
+        font-weight: bold;
+        }
+
+        p {
+        font-family: 'Lato', sans-serif;
+        display: inline-block;
+        margin: 5px 1px;
+        font-size: 15px;
+        }
+
+        #card {
+        border: solid 2px #000;
+        border-radius: 10px;
+        box-shadow: 1px 2px 10px #000;
+        background-color: #E9EEF2;
+        margin: auto;
+        }
+
+        #card-title {
+        padding: 5px;
+        color: #fff;
+        letter-spacing: 2px;
+        text-align: center;
+        text-transform: uppercase;
+        background-color: #2C6C73;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        }
+
+        #card-id {
+        padding: 5px;
+        display: flex;
+        }
+
+        #card-number{
+        display: inherit;
+        margin-right: 50px;
+        }
+
+        #card-information {
+        display: flex;
+        padding: 5px;
+        }
+
+        #card-photo {
+        border: solid 2px #000;
+        height: 170px;
+        width: 150px;
+        }
+
+        #card-detail {
+        display: flex;
+        
+        }
+
+        .card-box {
+        margin-right: 20px;
+        }
+
+        #cardsign {
+        height: 10vh;
+        width: 45vh;
+        position: relative;
+        top: 0;
+        left: 50vh;
+        }
+
+        #card-code {
+        padding: 5px;
+        background-color: #fff;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+      // Récupérez la chaîne JSON du localStorage
+      var objetEnJSON = localStorage.getItem("monObjet");
+
+      // Désérialisez la chaîne JSON en objet JavaScript
+      var objetRécupéré = JSON.parse(objetEnJSON);
+      var photoDataUrl = 'data:image/png;base64,' + objetRécupéré.Photo;
+      //document.getElementById('suivix').innerHTML = `${objetRécupéré.Suivi}`;
+      document.getElementById('sexex').innerHTML = `${objetRécupéré.Sexe}`;
+      document.getElementById('nomx').innerHTML = `${objetRécupéré.Nom}`;
+      document.getElementById('prenomx').innerHTML = `${objetRécupéré.Prenom}`;
+      document.getElementById('emailx').innerHTML = `${objetRécupéré.Email}`;
+      document.getElementById('phonex').innerHTML = `${objetRécupéré.Phone}`;
+     // document.getElementById('paysx').innerHTML = `${objetRécupéré.Pays}`;
+      document.getElementById('datex').innerHTML = `${objetRécupéré.Date}`;
+      document.getElementById('villex').innerHTML = `${objetRécupéré.Ville}`;
+      document.getElementById('card-photo').innerHTML = `<img style="height: 27vh; width: 100%;"
+      src="${photoDataUrl}" alt="">`;
+        var doc = new jsPDF(); 
+        var specialElementHandlers = { 
+            '#editor': function (element, renderer) { 
+                return true; 
+            } 
+        };
+        $('#senderPdf').click(function () { 
+            doc.fromHTML($('#card').html(), 15, 15, { 
+                'width': 190, 
+                    'elementHandlers': specialElementHandlers 
+            }); 
+            doc.save('carte_membre.pdf'); 
+        });
+  });
+    </script>
+</body>
+</html>

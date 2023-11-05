@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carte</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+    <div id="card">
+        <div id="card-title">
+          <h1><img id="imageToConvert" src="./../assets/img/dyscom.png" alt="" style="width: 5vh; height: 5vh;"> République du Bénin <img src="./../assets/img/dyscom.png" alt="" style="width: 5vh; height: 5vh;"></h1>
+        </div>
+        <div id="card-id">
+          <div id="card-number">
+            <p class="cardtitle">ID de la Carte :</p>
+            <p>135622178070</p>
+          </div>
+            <p class="cardtitle">Nationalité béninoise</p>
+        </div>
+        <div id="card-information">
+          <div id="card-photo"><img style="height: 170px; width: 150px;"
+            src="https://www.habbo.fr/habbo-imaging/avatarimage?hb=image&user=null&headonly=0&direction=3&head_direction=3&action=&gesture=&size=l" alt=""></div>
+          <div id="card-text">
+          <div id="card-name">
+            <div class="card-box"></div>
+            <p class="cardtitle">Nom :</p>
+            <p>Ruben</p>
+            <div class="card-box"></div>
+            <p class="cardtitle">Prénom :</p>
+            <p>Sacha</p>
+          </div>
+          <div id="card-detail">
+            <div class="card-box">
+              <p class="cardtitle">Sexe :</p>
+              <p>M</p>
+            </div>
+            <div class="card-box">
+              <p class="cardtitle">Né(e) le :</p>
+              <p>10.02.1998</p>
+            </div>
+            <div class="card-box">
+              <p class="cardtitle">Ville :</p>
+              <p>HabboVille</p>
+            </div>
+          </div>
+          <div id="card-sign" >
+            <p class="cardtitle" id="cardsignp">Code QR</p>
+            <div id="cardsign"></div>
+          </div> 
+          </div>
+        </div>
+        <div id="card-code">
+            <p>
+              <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   <<<<<<<<<<<<<<<<<<<<<<<<
+            </p>
+          </div>
+    </div>
+    <input type="button" value="Print Div Contents" id="btnPrint" />
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Bitter|Arvo|ato&display=swap');
+
+        body {
+        background-image: url(https://mangetoica.com/gallery_images/homepage/background-mosaiques//bg.png);
+        display: flex;
+        }
+
+        h1,h2,p{
+        margin: 0;
+        }
+
+        h1{
+        font-family: 'Arvo', serif;
+        font-weight: lighter;
+        font-size: 25px;
+        }
+
+        .cardtitle {
+        font-family: 'Bitter', serif;
+        font-weight: bold;
+        }
+
+        p {
+        font-family: 'Lato', sans-serif;
+        display: inline-block;
+        margin: 5px 1px;
+        font-size: 15px;
+        }
+
+        #card {
+        border: solid 2px #000;
+        border-radius: 10px;
+        box-shadow: 1px 2px 10px #000;
+        background-color: #E9EEF2;
+        margin: auto;
+        }
+
+        #card-title {
+        padding: 5px;
+        color: #fff;
+        letter-spacing: 2px;
+        text-align: center;
+        text-transform: uppercase;
+        background-color: #2C6C73;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        }
+
+        #card-id {
+        padding: 5px;
+        display: flex;
+        }
+
+        #card-number{
+        display: inherit;
+        margin-right: 50px;
+        }
+
+        #card-information {
+        display: flex;
+        padding: 5px;
+        }
+
+        #card-photo {
+        border: solid 2px #000;
+        height: 170px;
+        width: 150px;
+        }
+
+        #card-detail {
+        display: flex;
+        
+        }
+
+        .card-box {
+        margin-right: 20px;
+        }
+
+        #cardsign {
+        height: 60px;
+        width: 350px;
+        position: relative;
+        top: 0;
+        left: 0.50vh;
+        }
+
+        #card-code {
+        padding: 5px;
+        background-color: #fff;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    // Votre code pour créer le PDF va ici
+    // Obtenez l'élément image et la balise div
+    const imageElement = document.getElementById("imageToConvert");
+        const qrcodeDiv = document.getElementById("cardsign");
+    
+        // Créez un objet QRCode avec l'image source
+        const qrcode = new QRCode(qrcodeDiv, {
+          text: imageElement.src,
+          width: 60,  // Largeur du code QR
+          height: 60  // Hauteur du code QR
+        });
+    
+      $("#btnPrint").live("click", function () {
+      var divContents = $("#card").html();
+      var printWindow = window.open('', '', 'height=400,width=800');
+      printWindow.document.write('<html><head><title>Html to PDF</title>');
+      printWindow.document.write('</head><body >');
+      printWindow.document.write(`<div id="card">
+        <div id="card-title">
+          <h1><img id="imageToConvert" src="./../assets/img/dyscom.png" alt="" style="width: 5vh; height: 5vh;"> République du Bénin <img src="./../assets/img/dyscom.png" alt="" style="width: 5vh; height: 5vh;"></h1>
+        </div>
+        <div id="card-id">
+          <div id="card-number">
+            <p class="cardtitle">ID de la Carte :</p>
+            <p>135622178070</p>
+          </div>
+            <p class="cardtitle">Nationalité béninoise</p>
+        </div>
+        <div id="card-information">
+          <div id="card-photo"><img style="height: 170px; width: 150px;"
+            src="https://www.habbo.fr/habbo-imaging/avatarimage?hb=image&user=null&headonly=0&direction=3&head_direction=3&action=&gesture=&size=l" alt=""></div>
+          <div id="card-text">
+          <div id="card-name">
+            <div class="card-box"></div>
+            <p class="cardtitle">Nom :</p>
+            <p>Ruben</p>
+            <div class="card-box"></div>
+            <p class="cardtitle">Prénom :</p>
+            <p>Sacha</p>
+          </div>
+          <div id="card-detail">
+            <div class="card-box">
+              <p class="cardtitle">Sexe :</p>
+              <p>M</p>
+            </div>
+            <div class="card-box">
+              <p class="cardtitle">Né(e) le :</p>
+              <p>10.02.1998</p>
+            </div>
+            <div class="card-box">
+              <p class="cardtitle">Ville :</p>
+              <p>HabboVille</p>
+            </div>
+          </div>
+          <div id="card-sign" >
+            <p class="cardtitle" id="cardsignp">Code QR</p>
+            <div id="cardsign"></div>
+          </div> 
+          </div>
+        </div>
+        <div id="card-code">
+            <p>
+              <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   <<<<<<<<<<<<<<<<<<<<<<<<
+            </p>
+          </div>
+    </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Bitter|Arvo|ato&display=swap');
+
+        body {
+        background-image: url(https://mangetoica.com/gallery_images/homepage/background-mosaiques//bg.png);
+        display: flex;
+        }
+
+        h1,h2,p{
+        margin: 0;
+        }
+
+        h1{
+        font-family: 'Arvo', serif;
+        font-weight: lighter;
+        font-size: 25px;
+        }
+
+        .cardtitle {
+        font-family: 'Bitter', serif;
+        font-weight: bold;
+        }
+
+        p {
+        font-family: 'Lato', sans-serif;
+        display: inline-block;
+        margin: 5px 1px;
+        font-size: 15px;
+        }
+
+        #card {
+        border: solid 2px #000;
+        border-radius: 10px;
+        box-shadow: 1px 2px 10px #000;
+        background-color: #E9EEF2;
+        margin: auto;
+        }
+
+        #card-title {
+        padding: 5px;
+        color: #fff;
+        letter-spacing: 2px;
+        text-align: center;
+        text-transform: uppercase;
+        background-color: #2C6C73;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        }
+
+        #card-id {
+        padding: 5px;
+        display: flex;
+        }
+
+        #card-number{
+        display: inherit;
+        margin-right: 50px;
+        }
+
+        #card-information {
+        display: flex;
+        padding: 5px;
+        }
+
+        #card-photo {
+        border: solid 2px #000;
+        height: 170px;
+        width: 150px;
+        }
+
+        #card-detail {
+        display: flex;
+        
+        }
+
+        .card-box {
+        margin-right: 20px;
+        }
+
+        #cardsign {
+        height: 60px;
+        width: 350px;
+        position: relative;
+        top: 0;
+        left: 0.50vh;
+        }
+
+        #card-code {
+        padding: 5px;
+        background-color: #fff;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        }
+    </style>`);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.print();
+    });
+  });
+    </script>
+</body>
+</html>
