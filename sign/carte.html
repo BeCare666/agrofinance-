@@ -7,6 +7,7 @@
     <link href="./../assets/img/dyscom.png" rel="icon">
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+      <link rel="stylesheet" href="carte.css">
         <!-- Link to import alert personnal -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
@@ -64,7 +65,7 @@
         </p>
       </div>
     </div>
-   
+    <div id="preloader">Chargement...</div>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Bitter|Arvo|ato&display=swap');
 
@@ -161,6 +162,7 @@
     </style>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+   
       // Récupérez la chaîne JSON du localStorage
       var objetEnJSON = localStorage.getItem("monObjet");
 
@@ -185,8 +187,8 @@
       document.getElementById('imageToConvert').innerHTML = `<img  src="${photoDataUrl2}" alt="" style="width: 5vh; height: 5vh;">`;
       document.getElementById('imageToConvert2').innerHTML = `<img  src="${photoDataUrl2}" alt="" style="width: 5vh; height: 5vh;">`;
       document.getElementById('cardsign').innerHTML = `<img src="${qrcodeA}" alt="" 
-            style="width: 6vh; height: 6vh;">`;
-
+      style="width: 6vh; height: 6vh;">`;
+  var taketable = []
   function report() {
   let region = document.getElementById("card"); // whole screen
   html2canvas(region, {
@@ -198,25 +200,31 @@
       // here you can allow user to set bug-region
       // and send it with 'pngUrl' to server
       // Votre image Base64
-      var downloadLink = document.createElement("a");
-
-    // Définissez l'URL de l'image en tant qu'attribut href de l'élément <a>
-    downloadLink.href = pngUrl;
-
-    // Définissez l'attribut download pour spécifier le nom de fichier à télécharger
-    downloadLink.download = "carte_membre.jpg";
-
-    // Simulez un clic sur l'élément <a> pour déclencher le téléchargement
-    downloadLink.click();
-
-    // Supprimez l'élément <a> après le téléchargement
-    downloadLink.remove();
-
+      taketable.push(pngUrl)
+      Swal.fire({
+        title: 'Carte Membre!',
+        text: `Passez la télécharger`,
+        imageUrl: `${pngUrl}`,
+        imageWidth: 400,
+        imageHeight: 200,
+        allowOutsideClick: false,
+        imageAlt: 'Custom image',
+      }).then((result)=>{
+        if(result.isConfirmed){
+          paiement()
+        }
+      })
     },
   });
 }
+report()
 setTimeout(()=>{
-  let timerInterval
+  document.getElementById('card').style.display ='none'
+  document.getElementById('preloader').style.display ='none'
+},5000)
+function paiement() {
+document.getElementById('card').style.display ="none"
+let timerInterval
 Swal.fire({
   title: 'Télécharger votre carte',
   html: '"Je vais fermer dans <b></b> millisecondes."',
@@ -243,7 +251,7 @@ Swal.fire({
  
   }else{
     openKkiapayWidget({
-    amount: `100000`,
+    amount: `1`,
     position: "center",
     callback: "javascript:sendmycommandinCentremodale()",
     data: "",
@@ -256,14 +264,38 @@ Swal.fire({
     var trans = response.transactionId;
     //  console.log(trans);
     if (trans) {
-    report()
+  var downloadLink = document.createElement("a");
+
+  // Définissez l'URL de l'image en tant qu'attribut href de l'élément <a>
+  downloadLink.href = taketable[0];
+
+  // Définissez l'attribut download pour spécifier le nom de fichier à télécharger
+  downloadLink.download = "carte_membre.jpg";
+
+  // Simulez un clic sur l'élément <a> pour déclencher le téléchargement
+  downloadLink.click();
+
+  // Supprimez l'élément <a> après le téléchargement
+downloadLink.remove();
     Swal.fire({
     text: "Félicitations",
     icon: 'success',
     allowOutsideClick: false,
     }).then((result)=>{
       if(result.isConfirmed){
-        report()
+        var downloadLink = document.createElement("a");
+
+  // Définissez l'URL de l'image en tant qu'attribut href de l'élément <a>
+  downloadLink.href = taketable[0];
+
+  // Définissez l'attribut download pour spécifier le nom de fichier à télécharger
+  downloadLink.download = "carte_membre.jpg";
+
+  // Simulez un clic sur l'élément <a> pour déclencher le téléchargement
+  downloadLink.click();
+
+  // Supprimez l'élément <a> après le téléchargement
+  downloadLink.remove();
         window.location.href ="./../index.html"
       }
     }) 
@@ -282,7 +314,7 @@ Swal.fire({
     });
   }
 })
-}, 5000)
+}
 });
     </script>
     <script src="https://cdn.kkiapay.me/k.js"></script>
