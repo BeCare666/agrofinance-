@@ -29,8 +29,8 @@ checkbox.addEventListener("change", function() {
 
             // Définissez le gestionnaire d'événements pour lorsque l'image est chargée
             img.onload = function() {
-            const minWidth = 300; // La largeur minimale souhaitée
-            const minHeight = 300; // La longeur minimale souhaitée
+            const minWidth = 100; // La largeur minimale souhaitée
+            const minHeight = 100; // La longeur minimale souhaitée
             if (img.width >= minWidth && img.height >= minHeight) { 
             // Créez un élément canvas
             var canvas = document.createElement('canvas');
@@ -66,7 +66,7 @@ checkbox.addEventListener("change", function() {
             base64Contenttable.push(base64Content)
             // ...
             }else{
-                Swal.showValidationMessage(i18next.t('IDTRANSLATEFORM105'));
+               
                 //alert(`Votre image est trop pétite. Veuillez sélectionner une image d'au moins 300x300 pixels.`)
                 inputElement.value = ""
             }
